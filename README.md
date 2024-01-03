@@ -14,6 +14,7 @@
 
 A Simple Note App REST APIs, build using Nest/Node.js 
 
+#### Note: Please check the sample-env file. You will need to run a postgresql server, create a database and enter that database name in the .env file for keys DB_NAME_TEST and DB_NAME_DEVELOPMENT. Also update DB_USER and DB_PASS in .env
 
 ## Tools
 
