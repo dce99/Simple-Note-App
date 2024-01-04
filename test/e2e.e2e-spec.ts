@@ -15,6 +15,8 @@ import { NoteController } from '../src/modules/note/note.controller';
 import { UserService } from '../src/modules/user/user.service';
 import { AuthService } from '../src/modules/auth/auth.service';
 import { NoteService } from '../src/modules/note/note.service';
+import { SEQUELIZE } from '../src/core/constants';
+import { Sequelize } from 'sequelize';
 
 let userService: UserService;
 let authService: AuthService;
@@ -23,6 +25,7 @@ let user1: { email: string, name: string, id: number };
 let user2: { email: string, name: string, id: number };
 let token1: string;
 let token2: string;
+let sequelize: Sequelize;
 beforeAll(async () => {
 
     const moduleRef = await Test.createTestingModule({
@@ -42,7 +45,7 @@ beforeAll(async () => {
 
     authService = moduleRef.get<AuthService>(AuthService);
     userService = moduleRef.get<UserService>(UserService);
-    
+    sequelize = moduleRef.get<Sequelize>(SEQUELIZE);
 });
 
 
@@ -55,7 +58,7 @@ type ResponseType = {
     error_type: string,
 }
 
-describe("Auth (e22)", function () {
+describe("Auth (e2e)", function () {
   
     it(`/Post signup user1`, async () => {
         let users = await userService.findAll();
@@ -217,7 +220,7 @@ describe("Note (e2e)", function () {
 
 afterAll(async () => {
     await app.close();
-    
+    await sequelize.close();
 });
 
 
